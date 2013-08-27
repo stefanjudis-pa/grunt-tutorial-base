@@ -1,3 +1,5 @@
 ;(function() {
-  console.log('jo')
+  'use strict';
+
+  console.log('jo');
 } )();

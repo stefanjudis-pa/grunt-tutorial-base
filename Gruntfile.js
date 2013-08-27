@@ -5,6 +5,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
 
+    // clean it up
+    clean: {
+      build: {
+        src: [ 'dist' ]
+      }
+    },
+
     // css minification
     cssmin: {
       combine : {
@@ -122,6 +129,7 @@ module.exports = function(grunt) {
 
 
   // load custom tasks
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
@@ -138,6 +146,7 @@ module.exports = function(grunt) {
     'dist',
     [
       'jshint',
+      'clean',
       'copy',
       'targethtml:dist',
       'htmlmin',
