@@ -30,15 +30,6 @@ module.exports = function(grunt) {
 
     // copy all the stuff
     copy: {
-      images: {
-        files: [
-          {
-            src : ['img/**'],
-            dest: 'dist/',
-            filter: 'isFile'
-          }
-        ]
-      },
       scripts : {
         files: [
           {
@@ -70,6 +61,21 @@ module.exports = function(grunt) {
         files: {                                   // Dictionary of files
           'dist/index.html': 'dist/index.html'     // 'destination': 'source'
         }
+      }
+    },
+
+
+    // image optimization
+    imagemin: {
+      dynamic: {                         // Another target
+        files: [
+          {
+            expand: true,                  // Enable dynamic expansion
+            cwd: 'img/',                   // Src matches are relative to this path
+            src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+            dest: 'dist/img/'                  // Destination path prefix
+          }
+        ]
       }
     },
 
@@ -133,6 +139,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -152,7 +159,8 @@ module.exports = function(grunt) {
       'htmlmin',
       'cssmin:minify',
       'cssmin:combine',
-      'uglify'
+      'uglify',
+      'imagemin'
     ]
   );
 };
